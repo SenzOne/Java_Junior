@@ -1,5 +1,9 @@
 package lesson1.hw;
 
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
+
 public class Homework {
     static class Department {
         private String name;
@@ -125,13 +129,15 @@ public class Homework {
     }
 
 
-//    /**
-//     * Найти самого молодого сотрудника
-//     */
-//    static Optional<Person> findMostYoungestPerson(List<Person> people) {
-//// FIXME: ваша реализация здесь
-//
-//    }
+    /**
+     * Найти самого молодого сотрудника
+     */
+    public static Optional<Person> findMostYoungestPerson(List<Person> people) {
+// FIXME: ваша реализация здесь
+        return people.stream()
+                .min(Comparator.comparing(Person::getAge));
+
+    }
 //
 //    /**
 //     * Найти департамент, в котором работает сотрудник с самой большой зарплатой
