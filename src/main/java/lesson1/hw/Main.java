@@ -15,13 +15,19 @@ public class Main {
         youngestPerson.ifPresent(person -> System.out.println("Самый молодой сотрудник: " + person));
 
         Optional<Homework.Department> mostExpensiveDepartment = Homework.findMostExpensiveDepartment(people);
-        mostExpensiveDepartment.ifPresent(department -> System.out.println("Департамент с самой большой зарплатой: " + department));
+        mostExpensiveDepartment.ifPresent(department -> System.out.println(
+                "Департамент с самой большой зарплатой: " + department.getName()));
 
 
         Map<Homework.Department, List<Homework.Person>> peopleByDepartment = Homework.groupByDepartment(people);
         peopleByDepartment.forEach((department, persons) -> {
             System.out.println("Department: " + department.getName());
             persons.forEach(person -> System.out.println("  - " + person.getName()));
+        });
+
+        Map<String, Homework.Person> oldestInDepartment = Homework.getDepartmentOldestPerson(people);
+        oldestInDepartment.forEach((deptName, person) -> {
+            System.out.println("Самый старший сотрудник в департаменте " + deptName + ": " + person.getName() + " " + person.getAge());
         });
 
 

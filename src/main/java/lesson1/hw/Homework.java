@@ -1,6 +1,8 @@
 package lesson1.hw;
 
 import java.util.*;
+import java.util.function.BinaryOperator;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class Homework {
@@ -159,7 +161,7 @@ public class Homework {
      */
     public static Optional<Person> findMostYoungestPerson(List<Person> people) {
         return people.stream()
-                .min(Comparator.comparing(Person::getAge));
+                .min(Comparator.comparingInt(Person::getAge));
 
     }
 
@@ -168,7 +170,7 @@ public class Homework {
      */
     static Optional<Department> findMostExpensiveDepartment(List<Person> people) {
         return people.stream()
-                .max(Comparator.comparing(Person::getSalary))
+                .max(Comparator.comparingDouble(Person::getSalary))
                 .map(Person::getDepart);
     }
 
@@ -187,18 +189,43 @@ public class Homework {
 //// FIXME: ваша реализация здесь
 //    }
 //
-//    /**
-//     * В каждом департаменте найти самого старшего сотрудника
-//     */
-//    static Map<String, Person> getDepartmentOldestPerson(List<Person> people) {
-//// FIXME: ваша реализация здесь
-//    }
-//
+
+    /**
+     * В каждом департаменте найти самого старшего сотрудника
+     */
+    static Map<String, Person> getDepartmentOldestPerson(List<Person> people) {
+        return people.stream()
+                .collect(Collectors.toMap(
+                        p -> p.getDepart().getName(),
+                        p -> p,
+                        ((p1, p2) -> p1.getAge() > p2.getAge() ? p1 : p2
+                        ))
+                );
+    }
+
+    static Map<String, Person> getDepartmentOldestPersonV2(List<Person> people) {
+        return people.stream()
+                .collect(Collectors.toMap(person -> person.getDepart().getName(),
+                        Function.identity(),
+                        BinaryOperator.maxBy(Comparator.comparingInt(Person::getAge))));
+    }
+
+    static Map<String, Person> getDepartmentOldestPersonV3(List<Person> people) {
+        return people.stream()
+                .collect(Collectors.groupingBy(person -> person.getDepart().getName(),
+                        Collectors.collectingAndThen(
+                                Collectors.maxBy(Comparator.comparingInt(Person::getAge)),
+                                Optional::get)));
+    }
+
 //    /**
 //     * *Найти сотрудников с минимальными зарплатами в своем отделе
 //     * (прим. можно реализовать в два запроса)
 //     */
 //    static List<Person> cheapPersonsInDepartment(List<Person> people) {
-//// FIXME: ваша реализация здесь
+//        return people.stream()
+//                .collect(Collectors.toMap(
+//                        p
+//                ))
 //    }
 }
