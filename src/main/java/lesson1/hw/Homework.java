@@ -1,8 +1,7 @@
 package lesson1.hw;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class Homework {
     static class Department {
@@ -38,6 +37,19 @@ public class Homework {
             public Department build() {
                 return new Department(this);
             }
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Department that = (Department) o;
+            return Objects.equals(getName(), that.getName());
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(getName());
         }
     }
 
@@ -96,6 +108,19 @@ public class Homework {
                    '}';
         }
 
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Person person = (Person) o;
+            return getAge() == person.getAge() && Double.compare(getSalary(), person.getSalary()) == 0 && Objects.equals(getName(), person.getName()) && Objects.equals(getDepart(), person.getDepart());
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(getName(), getAge(), getSalary(), getDepart());
+        }
+
         public static class Builder {
             private String name;
             private int age;
@@ -133,25 +158,27 @@ public class Homework {
      * Найти самого молодого сотрудника
      */
     public static Optional<Person> findMostYoungestPerson(List<Person> people) {
-// FIXME: ваша реализация здесь
         return people.stream()
                 .min(Comparator.comparing(Person::getAge));
 
     }
-//
-//    /**
-//     * Найти департамент, в котором работает сотрудник с самой большой зарплатой
-//     */
-//    static Optional<Department> findMostExpensiveDepartment(List<Person> people) {
-//// FIXME: ваша реализация здесь
-//    }
-//
-//    /**
-//     * Сгруппировать сотрудников по департаментам
-//     */
-//    static Map<Department, List<Person>> groupByDepartment(List<Person> people) {
-//// FIXME: ваша реализация здесь
-//    }
+
+    /**
+     * Найти департамент, в котором работает сотрудник с самой большой зарплатой
+     */
+    static Optional<Department> findMostExpensiveDepartment(List<Person> people) {
+        return people.stream()
+                .max(Comparator.comparing(Person::getSalary))
+                .map(Person::getDepart);
+    }
+
+    /**
+     * Сгруппировать сотрудников по департаментам
+     */
+    static Map<Department, List<Person>> groupByDepartment(List<Person> people) {
+        return people.stream()
+                .collect(Collectors.groupingBy(Person::getDepart));
+    }
 //
 //    /**
 //     * Сгруппировать сотрудников по названиям департаментов

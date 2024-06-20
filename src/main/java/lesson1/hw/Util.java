@@ -13,7 +13,8 @@ public class Util {
 
 
      static List<Homework.Person> setPersonData() {
-        List<String> names = List.of("John Doe", "Jane Smith", "Alice Johnson", "Bob Brown", "Charlie Davis");
+        List<String> names = List.of("John Doe", "Jane Smith", "Alice Johnson", "Bob Brown",
+                "Charlie Davis", "Dana Alexander", "Robert Valdez", "Laura Johnson");
         List<String> departments = List.of("IT", "HR", "Finance", "Marketing", "Sales");
 
         List<Homework.Person> people = new ArrayList<>();
