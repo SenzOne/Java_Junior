@@ -1,3 +1,5 @@
+package lesson1;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -78,9 +80,9 @@ public class StreamDemo {
         for (int i = 0; i < 20; i++) {
             Book book = new Book();
             book.setName("Book# " + i);
+            book.setPages(ThreadLocalRandom.current().nextInt(100, 2500));
             book.setAuthor(getRandom(authors));
             book.setDate(LocalDate.now().minusYears(ThreadLocalRandom.current().nextLong(100)));
-            book.setPages(ThreadLocalRandom.current().nextInt(100, 2500));
             book.setPrice(ThreadLocalRandom.current().nextInt(1_000, 100_000) * 1.0);
 
             books.add(book);
