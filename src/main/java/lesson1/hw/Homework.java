@@ -218,14 +218,15 @@ public class Homework {
                                 Optional::get)));
     }
 
-//    /**
-//     * *Найти сотрудников с минимальными зарплатами в своем отделе
-//     * (прим. можно реализовать в два запроса)
-//     */
-//    static List<Person> cheapPersonsInDepartment(List<Person> people) {
-//        return people.stream()
-//                .collect(Collectors.toMap(
-//                        p
-//                ))
-//    }
+    /**
+     * *Найти сотрудников с минимальными зарплатами в своем отделе
+     * (прим. можно реализовать в два запроса)
+     */
+    static List<Person> cheapPersonsInDepartment(List<Person> people) {
+        return new ArrayList<>(people.stream()
+                .collect(Collectors.toMap(p -> p.getDepart().getName(),
+                        Function.identity(),
+                        BinaryOperator.minBy(Comparator.comparingDouble(Person::getSalary))))
+                .values());
+    }
 }

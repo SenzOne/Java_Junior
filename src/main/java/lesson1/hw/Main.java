@@ -31,5 +31,9 @@ public class Main {
         });
 
 
+        List<Homework.Person> cheapPersons = Homework.cheapPersonsInDepartment(people);
+        System.out.println("Сотрудники с минимальными зарплатами в своих отделах:");
+        cheapPersons.forEach(System.out::println);
+
     }
 }
