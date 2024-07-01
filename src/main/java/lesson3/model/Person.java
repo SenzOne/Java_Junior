@@ -8,13 +8,15 @@ public class Person {
     private String name;
     private String lastName;
     private Integer age;
+    private Long departmentId;
 
     public Person() {}
 
-    public Person(String name, String lastName, Integer age) {
+    public Person(String name, String lastName, Integer age, Long departmentId) {
         this.name = name;
         this.lastName = lastName;
         this.age = age;
+        this.departmentId = departmentId;
     }
 
     public Long getId() {
@@ -49,17 +51,25 @@ public class Person {
         this.age = age;
     }
 
+    public Long getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Long departmentId) {
+        this.departmentId = departmentId;
+    }
+
     @Override
     public boolean equals(Object object) {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         Person person = (Person) object;
-        return Objects.equals(getId(), person.getId()) && Objects.equals(getName(), person.getName()) && Objects.equals(getLastName(), person.getLastName()) && Objects.equals(getAge(), person.getAge());
+        return Objects.equals(id, person.id) && Objects.equals(name, person.name) && Objects.equals(lastName, person.lastName) && Objects.equals(age, person.age) && Objects.equals(getDepartmentId(), person.getDepartmentId());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getId(), getName(), getLastName(), getAge());
+        return Objects.hash(id, name, lastName, age, getDepartmentId());
     }
 
     @Override
@@ -69,6 +79,7 @@ public class Person {
                ", name='" + name + '\'' +
                ", lastName='" + lastName + '\'' +
                ", age=" + age +
+               ", departmentId=" + departmentId +
                '}';
     }
 
@@ -77,6 +88,7 @@ public class Person {
         private String name;
         private String lastName;
         private Integer age;
+        private Long departmentId;
 
         public Builder() {}
 
@@ -85,6 +97,7 @@ public class Person {
             this.name = person.name;
             this.lastName = person.lastName;
             this.age = person.age;
+            this.departmentId = person.departmentId;
         }
 
         public Builder id(Long id) {
@@ -107,12 +120,18 @@ public class Person {
             return this;
         }
 
+        public Builder departmentId(Long departmentId) {
+            this.departmentId = departmentId;
+            return this;
+        }
+
         public Person build() {
             Person person = new Person();
             person.id = this.id;
             person.name = this.name;
             person.lastName = this.lastName;
             person.age = this.age;
+            person.departmentId = this.departmentId;
             return person;
         }
     }

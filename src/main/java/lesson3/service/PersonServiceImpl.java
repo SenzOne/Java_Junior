@@ -16,12 +16,17 @@ public class PersonServiceImpl implements PersonService {
     }
 
     @Override
-    public void savePerson(String name, String lastName, byte age) {
-        personDaoJdbc.savePerson(name, lastName, age);
+    public void savePerson(String name, String lastName, Integer age, Long departmentId) {
+        personDaoJdbc.savePerson(name, lastName, age, departmentId);
     }
 
     @Override
     public List<Person> getAllPeoples() {
         return personDaoJdbc.getAllPeoples();
+    }
+
+    @Override
+    public String getDepartmentNameByPersonId(Long personId) {
+        return personDaoJdbc.getDepartmentNameByPersonId(personId);
     }
 }
