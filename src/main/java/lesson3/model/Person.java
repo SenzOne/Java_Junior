@@ -7,11 +7,11 @@ public class Person {
     private Long id;
     private String name;
     private String lastName;
-    private Byte age;
+    private Integer age;
 
     public Person() {}
 
-    public Person(String name, String lastName, Byte age) {
+    public Person(String name, String lastName, Integer age) {
         this.name = name;
         this.lastName = lastName;
         this.age = age;
@@ -41,11 +41,11 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public Byte getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(Byte age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -76,7 +76,7 @@ public class Person {
         private Long id;
         private String name;
         private String lastName;
-        private Byte age;
+        private Integer age;
 
         public Builder() {}
 
@@ -102,7 +102,7 @@ public class Person {
             return this;
         }
 
-        public Builder age(Byte age) {
+        public Builder age(Integer age) {
             this.age = age;
             return this;
         }

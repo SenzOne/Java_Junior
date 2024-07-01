@@ -22,6 +22,6 @@ public class PersonServiceImpl implements PersonService {
 
     @Override
     public List<Person> getAllPeoples() {
-        return null;
+        return personDaoJdbc.getAllPeoples();
     }
 }
