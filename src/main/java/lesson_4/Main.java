@@ -5,7 +5,10 @@ import lesson_4.repository.PostRepository;
 public class Main {
     public static void main(String[] args) {
 
-        PostRepository repository = new PostRepository();
-        repository.savePost("test");
+        PostRepository postRepository = new PostRepository();
+        postRepository.savePost("test");
+        postRepository.savePost("test_2");
+        System.out.println(postRepository.getAllPosts());
+
     }
 }
